@@ -161,7 +161,20 @@ dev.off()
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio2.pdf``.
 
 ```{r Solucion ejercicio 2}
+gdis1 <- ggplot(ds, aes(x=Temp9am, y=Pressure9am))+geom_point()
+gdis1
 
+gdis2 <- ggplot(ds, aes(x=Temp9am, y=Pressure9am, shape = RainToday))+geom_point()
+gdis2
+
+gdis3 <- ggplot(ds, aes(x=Temp9am, y=Pressure9am, colour = RainToday))+geom_point() #Se observa mucho mejor con el color
+gdis3
+
+gtitulo <- gdis3 + ggtitle("Grafico de dispersion entre temperatura y presion")
+
+pdf("Ejercicio2.pdf")
+gtitulo
+dev.off()
 ```
 
 ### **Ejercicio 3**
