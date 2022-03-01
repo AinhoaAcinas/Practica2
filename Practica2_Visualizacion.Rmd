@@ -147,9 +147,8 @@ grafico2
 grafico3 <- grafico2+ggtitle("Dispersión temperatura máxima y minima")
 grafico3
 
-pdf("Ejercicio1.pdf")
-grafico3
-dev.off()
+ggsave("./figure/Ejercicio1.pdf")
+
 ```
 
 ### **Ejercicio 2**
@@ -172,9 +171,8 @@ gdis3
 
 gtitulo <- gdis3 + ggtitle("Grafico de dispersion entre temperatura y presion")
 
-pdf("Ejercicio2.pdf")
-gtitulo
-dev.off()
+ggsave("./figure/Ejercicio2.pdf")
+
 ```
 
 ### **Ejercicio 3**
@@ -188,7 +186,30 @@ dev.off()
 * Cambia ahora la capa **geom_point()** del gráfico anterior por la capa  **geom_jitter()**. ¿Qué diferencia observas?
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio3.pdf``.
 
+
+iris.grafico2 + geom_point()
+
 ```{r Solucion ejercicio 3}
+load("data/iris_tidy.Rdata")
+str(iris) #Contiene 5 variables y 150 objetos
+
+iris.grafico1 <- ggplot(iris.tidy, aes(x = Species, y = Value))
+iris.grafico1
+
+iris.grafico1+geom_point()+ggtitle("Grafico valor y especies de iris")
+
+iris.grafico2 <- ggplot(iris.tidy, aes(x = Species, y = Value, colour = Part))
+iris.grafico2 + geom_point()
+
+horizontal <- ggplot(iris.tidy, aes(x = Species, y = Value, colour = Part))+geom_point() + facet_grid(Measure~.)
+horizontal
+vertical <- ggplot(iris.tidy, aes(x = Species, y = Value, colour = Part))+geom_point() + facet_grid(.~Measure) #Se puede comparar mejor con cortes verticales
+vertical
+
+iris.grafico3 <- ggplot(iris.tidy, aes(x = Species, y = Value, colour = Part))+ geom_jitter() #La diferencia esta en que mediante geom_jitter los puntos salen mas dispersos y mediante geom_ponint los puntos salen especificamente en las coordenadas que le corresponenen.
+iris.grafico3
+
+ggsave("./figure/Ejercicio3.pdf")
 
 ```
 
