@@ -284,8 +284,24 @@ ggplot(data=Dosis.Medicina2, aes(x=Dosis, y=Efectividad, group=Complemento)) +
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio4.pdf``.
 
 ```{r Solucion ejercicio 4}
+load("data/Ejercicio4_Data.Rdata")
+str(DatosEjer4) #Tiene 3 variables y 200 registros
+grafico1 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas, colour=Fabricante))+geom_point()
+grafico1 #Podemos observar que no es muy adecuado para ver la evolucion ya que apesar de que a groso modo si que se puede comprobar su evolucion no queda del todo claro. Seria mas apropiado crear una linea que una los puntos para ver mas detalladamente su trayectoria de ventas a lo largo del tiempo.
+
+glinea <- grafico1 + geom_line()
+glinea
+
+glinea2 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas, colour = Fabricante))+geom_line(aes(linetype=Fabricante))+geom_point()
+glinea2
+
+gtitulo <- glinea2 + ggtitle("Ventas mensuales de diferentes compañías tecnológicas")
+gtitulo
+
+ggsave("Ejercicio4.pdf")
 
 ```
+
 
 ## Barras de error con **ggplot2**
 
